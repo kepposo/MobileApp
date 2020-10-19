@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Star Store',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -20,16 +20,18 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Star Store'),
     );
   }
 }
+
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -63,6 +65,99 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _decrementCounter()
+  {
+    setState((){
+      if(_counter > 0)
+      {
+      _counter--;
+      showSnakBar();
+      }
+    });
+  }
+
+//the status of Scaffold​
+final GlobalKey<ScaffoldState> scaffoldStateKey = new GlobalKey<ScaffoldState>();
+void showSnakBar()
+{
+  scaffoldStateKey.currentState.showSnackBar(
+    new SnackBar(content: Text('Counter Decreased'),
+    action: SnackBarAction(
+      label: "UNDO",
+      onPressed: _incrementCounter,
+    ),
+    )
+    
+  );
+}
+
+
+
+Future<void> _showSimpleDialog() async 
+{
+  var myBuilder = (BuildContext context){
+    return new SimpleDialog(
+      title: new Text('This is a test simple dialog'),
+      children: <Widget>[
+        new SimpleDialogOption(child: Text('YES'), onPressed: ()=>Navigator.pop(context),),
+        new SimpleDialogOption(child: Text('NO'), onPressed: ()=>Navigator.pop(context),),
+      ],
+    );
+  };
+  await showDialog(
+    context: context,
+    builder: myBuilder
+  );
+}
+
+
+Future<void> _showMyDialog() async {
+
+ return showDialog<void>(
+   context: context,
+    barrierDismissible: false, // user must tap button!​
+    builder: (BuildContext context)
+    {
+      return AlertDialog(title: Text('Dialog Test'),
+        content: SingleChildScrollView(
+             child: ListBody(
+             children: <Widget>[
+                Text('this an alert dialog test.'),
+            ],
+          ),
+        ),
+        actions: <Widget>[FlatButton(
+             child: Text('Ok'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          ],
+          );
+    },
+   );
+}
+
+void _showBottomSheet() 
+{
+  showModalBottomSheet(
+    context: context, 
+    builder: (BuildContext context){
+      return new Container(
+        padding: EdgeInsets.all(22.0),
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('Hello this is Buttom Alert  '),
+            RaisedButton(
+              child: Text('close'),
+              onPressed: ()  => Navigator.pop(context) )
+          ],
+        ),
+      );
+    });
+
+
+
+}
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -72,6 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      key: scaffoldStateKey,
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -104,13 +200,31 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              onPressed: _decrementCounter,
+              child: Icon(Icons.remove),
+            ),
+            RaisedButton(
+              onPressed: _showMyDialog,
+              child: Text("Show Alert"),
+            ),
+            RaisedButton(
+              onPressed: _showBottomSheet,
+              child: Text("Show Bottom Sheet"),
+            ),
+            RaisedButton(
+              onPressed: _showSimpleDialog,
+              child: Text("Show Simple Dialog"),
+            ),
+            Image.asset('assets/logo.jpg', height: 100),
           ],
         ),
+        
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Icon(Icons.add), 
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
