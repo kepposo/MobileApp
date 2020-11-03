@@ -52,7 +52,7 @@ class _State extends State<HomeScreen> {
             Center(
               child: Stack(
                 children: <Widget>[
-                  Padding(padding: EdgeInsets.only(top: 5, left: 6),             
+                  Padding(padding: EdgeInsets.only(top: 5, left: 3, right: 2),             
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
@@ -82,7 +82,7 @@ class _State extends State<HomeScreen> {
                           color: Colors.grey.withOpacity(0.05),
                         ),
                       ),
-                    SizedBox(width: 223.0), //space between buttons
+                    SizedBox(width: 210.0), //space between buttons
                     ButtonTheme(
                      height: 205.0,
                       child:RaisedButton(
@@ -99,6 +99,13 @@ class _State extends State<HomeScreen> {
               ),
             ),
             //carousel end
+            Row(children: <Widget>[
+              
+              Text('Popular Items', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,)
+              
+              ),
+            ],
+            ) 
           ],
         ),
         
