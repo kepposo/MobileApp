@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -136,8 +136,6 @@ class _State extends State<HomeScreen> {
                 clipBehavior: Clip.antiAlias,
                 child: Column(
                   children: [
-
-                    
                     Image.asset('assets/PS4/items/ff7-ps4.jpg'),
                     ListTile(
                       title: const Text('Final Fantasy 7 Remake',
@@ -207,11 +205,14 @@ class _State extends State<HomeScreen> {
                   ],
                 ),
               ),
-
+              
               //item card end
             ],
+           
           ),
-        ));
+          
+        )
+        );
   }
 }
 
@@ -274,11 +275,6 @@ class SelectedPhoto extends StatelessWidget {
       ),
     );
   }
-}
-
-//read productrs.json
-Future<String> _loadFromAsset() async {
-  return await rootBundle.loadString("assets/json/products.json");
 }
 
 //search bar
