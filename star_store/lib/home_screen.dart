@@ -1,6 +1,8 @@
-import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:star_store/register.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -55,6 +57,11 @@ class _State extends State<HomeScreen> {
               });
             },
           ),
+          actions: [
+            IconButton(icon: Icon(Icons.access_time),
+           onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp())),
+            )
+          ],
         ),
         body:
             //carousel start
