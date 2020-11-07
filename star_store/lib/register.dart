@@ -14,6 +14,7 @@ class SignUp extends StatelessWidget
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              Image.asset('assets/logo/logoBlue.png', height: 200,),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
                 child: TextField(

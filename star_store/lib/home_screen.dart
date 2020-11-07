@@ -1,10 +1,7 @@
-
 import 'products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:star_store/register.dart';
-
-
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,7 +9,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _State extends State<HomeScreen> {
-
   Future<String> getJson() {
     var products = rootBundle.loadString('assets/json/products.json');
     return products;
@@ -58,11 +54,17 @@ class _State extends State<HomeScreen> {
               });
             },
           ),
-          actions: [
-            IconButton(icon: Icon(Icons.mood_rounded),
-           onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp())),
-            )
-          ],
+        ),
+        endDrawer: Drawer(
+          child: Column(
+            children: [
+              Padding(padding: EdgeInsets.only(top: 50)),
+              Image.asset(
+                'assets/logo/logoBlue.png',
+                height: 100,
+              ),
+            ] 
+          ),
         ),
         body:
             //carousel start
@@ -213,14 +215,11 @@ class _State extends State<HomeScreen> {
                   ],
                 ),
               ),
-              
+
               //item card end
             ],
-           
           ),
-          
-        )
-        );
+        ));
   }
 }
 
