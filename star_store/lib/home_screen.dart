@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 
-=======
 import 'products.dart';
->>>>>>> 234e64e9ff293293282669f028eec74d8c686984
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:star_store/register.dart';
@@ -62,7 +59,7 @@ class _State extends State<HomeScreen> {
             },
           ),
           actions: [
-            IconButton(icon: Icon(Icons.access_time),
+            IconButton(icon: Icon(Icons.mood_rounded),
            onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp())),
             )
           ],
