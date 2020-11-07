@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -44,15 +45,16 @@ class _State extends State<HomeScreen> {
         ),
       ),
         body: 
-        
         //carousel start
+        SingleChildScrollView(
+          child:
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Center(
               child: Stack(
                 children: <Widget>[
-                  Padding(padding: EdgeInsets.only(top: 5, left: 3, right: 2),             
+                  Padding(padding: EdgeInsets.only(top: 5, left: 6, right: 2),             
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
@@ -91,24 +93,68 @@ class _State extends State<HomeScreen> {
                       onPressed: _nextImage,
                       elevation: 5.0,
                       color: Colors.grey.withOpacity(0.05),
-                    )
-                    ),
-              ],
-            )
+                        )
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
             //carousel end
+            
+            Padding(padding: EdgeInsets.only(top: 20)),
+
             Row(children: <Widget>[
-              
-              Text('Popular Items', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,)
-              
+              Padding(padding: EdgeInsets.only(left: 6)),
+              Text('Popular Items:', style: 
+              TextStyle(fontSize: 30, fontWeight: FontWeight.bold,)
+                  ),
+                ],
               ),
+             Padding(padding: EdgeInsets.only(top: 10)),
+
+             //item card start
+              Card(
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: [
+                    Image.asset('assets/PS4/items/ff7-ps4.jpg'),
+                    Image.asset('assets/card-sample-image-2.jpg'),
+                    ListTile(
+                      title: const Text('Final Fantasy 7 Remake',
+                      style: TextStyle(fontSize: 20)
+                      ),
+                      subtitle: Text(
+                        "59.99\$",
+                        style: TextStyle(color: Colors.black.withOpacity(0.6), fontSize: 20),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'This game is very naaaaice.',
+                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                      ),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.start,
+                      children: [
+                        FlatButton(
+                          textColor: const Color(0xFF6200EE),
+                          onPressed: () {
+                            // Perform some action
+                          },
+                          child: const Text('Add to cart'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            //item card end
             ],
-            ) 
-          ],
-        ),
-        
+          ),
+          )
         );
   }
 }
@@ -186,6 +232,14 @@ class SelectedPhoto extends StatelessWidget {
     );
   }
 }
+
+//read productrs.json
+Future<String>_loadFromAsset() async {
+  
+  return await rootBundle.loadString("assets/json/products.json");
+}
+
+
 
 
 //search bar
