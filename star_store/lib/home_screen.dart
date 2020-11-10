@@ -2,6 +2,7 @@ import 'products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:star_store/register.dart';
+import 'dart:convert';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -56,15 +57,13 @@ class _State extends State<HomeScreen> {
           ),
         ),
         endDrawer: Drawer(
-          child: Column(
-            children: [
-              Padding(padding: EdgeInsets.only(top: 50)),
-              Image.asset(
-                'assets/logo/logoBlue.png',
-                height: 100,
-              ),
-            ] 
-          ),
+          child: Column(children: [
+            Padding(padding: EdgeInsets.only(top: 50)),
+            Image.asset(
+              'assets/logo/logoBlue.png',
+              height: 100,
+            ),
+          ]),
         ),
         body:
             //carousel start
@@ -141,79 +140,67 @@ class _State extends State<HomeScreen> {
 
               Padding(padding: EdgeInsets.only(top: 10)),
 
-              //item card start
-              Card(
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: [
-                    Image.asset('assets/PS4/items/ff7-ps4.jpg'),
-                    ListTile(
-                      title: const Text('Final Fantasy 7 Remake',
-                          style: TextStyle(fontSize: 20)),
-                      subtitle: Text(
-                        "59.99\$",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.6), fontSize: 20),
+              FutureBuilder(
+                builder: (context, snapshot) {
+                  var showData = json.decode(snapshot.data.toString());
+                  return Expanded(
+                    flex: 0,
+                    child: SizedBox( height: 100,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GridView.count(
+                            childAspectRatio: 0.8,
+                            shrinkWrap: true,
+                            primary: false,
+                            crossAxisSpacing: 00,
+                            mainAxisSpacing: 00,
+                            crossAxisCount: 2,
+                            children: <Widget>[
+                              Container(
+                                child:
+                                    //item card start
+                                    Card(
+                                  clipBehavior: Clip.antiAlias,
+                                  child: Column(
+                                    children: [
+                                      Image.asset(showData[0]["ayshy"][index]["img"]),
+                                      ListTile(
+                                        title: Text(
+                                            showData[0]["ayshy"][index]["name"].toString(),
+                                            style: TextStyle(fontSize: 15)),
+                                        subtitle: Text(
+                                          showData[0]["ayshy"][index]["price"].toString(),
+                                          style: TextStyle(
+                                              color:
+                                                  Colors.black.withOpacity(0.6),
+                                              fontSize: 17),
+                                        ),
+                                      ),
+                                      ButtonBar(
+                                        children: [
+                                          FlatButton(
+                                            textColor: const Color(0xFF6200EE),
+                                            onPressed: () {
+                                              // Perform some action
+                                            },
+                                            child: const Text('Add to cart'),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                        itemCount: showData[0]["ayshy"].length,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'This game is very naaaaice.',
-                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                      ),
-                    ),
-                    ButtonBar(
-                      alignment: MainAxisAlignment.start,
-                      children: [
-                        FlatButton(
-                          textColor: const Color(0xFF6200EE),
-                          onPressed: () {
-                            // Perform some action
-                          },
-                          child: const Text('Add to cart'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              Card(
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: [
-                    Image.asset('assets/PS4/items/ps4-pro.jpg'),
-                    ListTile(
-                      title: const Text('Playstation 4 Pro',
-                          style: TextStyle(fontSize: 20)),
-                      subtitle: Text(
-                        "399.99\$",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.6), fontSize: 20),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'This game is very naaaaice.',
-                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                      ),
-                    ),
-                    ButtonBar(
-                      alignment: MainAxisAlignment.start,
-                      children: [
-                        FlatButton(
-                          textColor: const Color(0xFF6200EE),
-                          onPressed: () {
-                            // Perform some action
-                          },
-                          child: const Text('Add to cart'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                  );
+                },
+                future: DefaultAssetBundle.of(context).loadString("assets/json/products.json"),
               ),
 
               //item card end
