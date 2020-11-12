@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SignUp extends StatelessWidget 
+class Login extends StatelessWidget 
 {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         
         appBar: AppBar(
-          title: Text("Sign Up"),
+          title: Text("Login"),
         ),
         body: Center(
             child: SingleChildScrollView(
@@ -31,18 +31,6 @@ class SignUp extends StatelessWidget
                 padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
                 child: TextField(
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person),
-                    labelText: 'Name',
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black)),
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                child: TextField(
-                  decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     labelText: 'Password',
                     enabledBorder: OutlineInputBorder(
@@ -56,7 +44,7 @@ class SignUp extends StatelessWidget
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
                 child: MaterialButton(
                   child: Text(
-                    'Register',
+                    'Login',
                     style: TextStyle(color: Colors.white),
                   ),
                   color: Colors.blue,
@@ -65,6 +53,18 @@ class SignUp extends StatelessWidget
                   },
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(left:200, bottom: 50),
+                child: GestureDetector(
+                  onTap: ()=> Navigator.pushNamed(context, '/register'),
+                  child: Text('''SignUp'''
+                  ,style: TextStyle(
+                    fontSize: 20
+                    ,fontWeight: FontWeight.bold
+                  ),
+                  ),
+                ), 
+                )
             ],
           ),
         )));

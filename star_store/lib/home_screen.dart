@@ -63,6 +63,13 @@ class _State extends State<HomeScreen> {
               'assets/logo/logoBlue.png',
               height: 100,
             ),
+            Padding(
+              padding:EdgeInsets.only(top: 50),
+              child: RaisedButton(
+                child: Text('Register'),
+                onPressed:()=> Navigator.pushNamed(context, '/login')
+                ),
+            )
           ]),
         ),
         body:
