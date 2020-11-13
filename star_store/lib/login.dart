@@ -7,7 +7,9 @@ class Login extends StatelessWidget
     return Scaffold(
         
         appBar: AppBar(
-          title: Text("Login"),
+          title: 
+          Text("Login"),
+          centerTitle: true,
         ),
         body: Center(
             child: SingleChildScrollView(
@@ -53,14 +55,16 @@ class Login extends StatelessWidget
                   },
                 ),
               ),
+        
               Padding(
-                padding: EdgeInsets.only(left:200, bottom: 50),
+                padding: EdgeInsets.only(left:0, bottom: 40),
                 child: GestureDetector(
                   onTap: ()=> Navigator.pushNamed(context, '/register'),
-                  child: Text('''SignUp'''
+                  child: Text('Sign Up'
                   ,style: TextStyle(
-                    fontSize: 20
-                    ,fontWeight: FontWeight.bold
+                    fontSize: 15
+                    ,fontWeight: FontWeight.bold,
+                    color: Colors.blue
                   ),
                   ),
                 ), 

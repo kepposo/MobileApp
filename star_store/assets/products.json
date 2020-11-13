@@ -1,13 +1,11 @@
 [
-    {
-        "ayshy": [
             {
                 "id": 1,
                 "type": "PS4",
                 "name": "PS4 Pro Controller - Red",
                 "price": 49.99,
                 "description": "A red PS4 Pro controller.",
-                "img": "assets/Ps4/items/ps4_controller.jpg",
+                "img": "assets/ps4/items/ps4_controller.jpg",
                 "rating": 3.9,
                 "boughtNum": 200
             },
@@ -17,7 +15,7 @@
                 "name": "Xbox One X Controller - Black",
                 "price": 45.99,
                 "description": "An Xbox One X controller.",
-                "img": "assets/Xbox/items/xbox-controller.jpg",
+                "img": "assets/xbox/items/xbox-controller.jpg",
                 "rating": 4.3,
                 "boughtNum": 150
             },
@@ -47,7 +45,7 @@
                 "name": "Xbox One Kinect",
                 "price": 55.99,
                 "description": "The Xbox One X Kinect, comes with two games.",
-                "img": "assets/Xbox/items/xbox-kinect.jpg",
+                "img": "assets/xbox/items/xbox-kinect.jpg",
                 "rating": 4.0,
                 "boughtNum": 250
             },
@@ -57,7 +55,7 @@
                 "name": "Final Fantasy 7 Remake",
                 "price": 59.99,
                 "description": "The long awaited Final Fantasy 7 Remake for the Playstation 4.",
-                "img": "assets/Ps4/items/ff7-ps4.jpg",
+                "img": "assets/ps4/items/ff7-ps4.jpg",
                 "rating": 4.9,
                 "boughtNum": 1500
             },
@@ -67,7 +65,7 @@
                 "name": "PS4 VR",
                 "price": 75.99,
                 "description": "The PS4 VR headset, comes with a PS4 camera and two VR games.",
-                "img": "assets/Ps4/items/vr.jpg",
+                "img": "assets/ps4/items/vr.jpg",
                 "rating": 4.8,
                 "boughtNum": 199
             },
@@ -77,7 +75,7 @@
                 "name": "Fifa 20",
                 "price": 59.99,
                 "description": "The game Fifa 20 for the Playstation 4.",
-                "img": "assets/Ps4/items/fifa20-ps4.jpg",
+                "img": "assets/ps4/items/fifa20-ps4.jpg",
                 "rating": 2.9,
                 "boughtNum": 30
             },
@@ -87,7 +85,7 @@
                 "name": "PS4 Controller - Black",
                 "price": 45.99,
                 "description": "The original PS4 Pro controller.",
-                "img": "assets/Ps4/items/ps4_controller_black.jpg",
+                "img": "assets/ps4/items/ps4_controller_black.jpg",
                 "rating": 4.1,
                 "boughtNum": 201
             },
@@ -97,7 +95,7 @@
                 "name": "PS4 Platinum Headset",
                 "price": 99.99,
                 "description": "The platinum headset made by Sony for the Playstation 4 Pro.",
-                "img": "assets/Ps4/items/ps4-platinum-headset.jpg",
+                "img": "assets/ps4/items/ps4-platinum-headset.jpg",
                 "rating": 3.8,
                 "boughtNum": 70
             },
@@ -107,7 +105,7 @@
                 "name": "Playstation 4 Pro - 1TB",
                 "price": 399.99,
                 "description": "The Playstation 4 Pro Home Console.",
-                "img": "assets/Ps4/items/ps4-pro.jpg",
+                "img": "assets/ps4/items/ps4-pro.jpg",
                 "rating": 4.7,
                 "boughtNum": 518
             },
@@ -117,7 +115,7 @@
                 "name": "Resident Evil 2 Remake",
                 "price": 59.99,
                 "description": "The Resident Evil 2 Remake game for the Playstation 4.",
-                "img": "assets/Ps4/items/re2-ps4.jpg",
+                "img": "assets/ps4/items/re2-ps4.jpg",
                 "rating": 4.5,
                 "boughtNum": 345
             },
@@ -127,7 +125,7 @@
                 "name": "Death Stranding",
                 "price": 59.99,
                 "description": "The long awaited Death Stranding game for the Playstation 4.",
-                "img": "assets/Ps4/items/death-stranding-ps4.jpg",
+                "img": "assets/ps4/items/death-stranding-ps4.jpg",
                 "rating": 5,
                 "boughtNum": 2450
             },
@@ -137,7 +135,7 @@
                 "name": "Fifa 20",
                 "price": 59.99,
                 "description": "The game Fifa 20 for the Xbox One X.",
-                "img": "assets/Xbox/items/fifa20-xbox.jpg",
+                "img": "assets/xbox/items/fifa20-xbox.jpg",
                 "rating": 2.5,
                 "boughtNum": 25
             },
@@ -147,7 +145,7 @@
                 "name": "Gears 5",
                 "price": 59.99,
                 "description": "The game Gears of War 5 for the Xbox One X.",
-                "img": "assets/Xbox/items/gears5-xbox.jpg",
+                "img": "assets/xbox/items/gears5-xbox.jpg",
                 "rating": 3.5,
                 "boughtNum": 100
             },
@@ -157,7 +155,7 @@
                 "name": "Halo 5",
                 "price": 59.99,
                 "description": "The game Halo 5 for the Xbox One X.",
-                "img": "assets/Xbox/items/halo5-xbox.jpg",
+                "img": "assets/xbox/items/halo5-xbox.jpg",
                 "rating": 4.3,
                 "boughtNum": 324
             },
@@ -167,7 +165,7 @@
                 "name": "Sekiro - Shadows Die Twice",
                 "price": 59.99,
                 "description": "The game Sekiro - Shadows Die Twice for the Playstation 4.",
-                "img": "assets/Ps4/items/sekiro-ps4.jpg",
+                "img": "assets/ps4/items/sekiro-ps4.jpg",
                 "rating": 4.7,
                 "boughtNum": 598
             },
@@ -177,7 +175,7 @@
                 "name": "Sekiro - Shadows Die Twice",
                 "price": 59.99,
                 "description": "The game Sekiro - Shadows Die Twice for the Xbox One X.",
-                "img": "assets/Xbox/items/sekiro-xbox.jpg",
+                "img": "assets/xbox/items/sekiro-xbox.jpg",
                 "rating": 4.7,
                 "boughtNum": 315
             },
@@ -187,7 +185,7 @@
                 "name": "Xbox One X Controller - Red",
                 "price": 49.99,
                 "description": "TheXbox One X red controller.",
-                "img": "assets/Xbox/items/xbox-controller-red.jpg",
+                "img": "assets/xbox/items/xbox-controller-red.jpg",
                 "rating": 4.1,
                 "boughtNum": 245
             },
@@ -197,7 +195,7 @@
                 "name": "Xbox One X Controller - White",
                 "price": 49.99,
                 "description": "The Xbox One X white controller.",
-                "img": "assets/Xbox/items/xbox-controller-white.jpg",
+                "img": "assets/xbox/items/xbox-controller-white.jpg",
                 "rating": 4.1,
                 "boughtNum": 245
             },
@@ -207,7 +205,7 @@
                 "name": "Xbox One X",
                 "price": 499.99,
                 "description": "The Xbox One X home console.",
-                "img": "assets/Xbox/items/xbox-one.jpg",
+                "img": "assets/xbox/items/xbox-one.jpg",
                 "rating": 4.0,
                 "boughtNum": 460
             },
@@ -217,7 +215,7 @@
                 "name": "Xbox One X - Gears 5 Edition",
                 "price": 559.99,
                 "description": "The Xbox One X home console styled after the game Gears 5.",
-                "img": "assets/Xbox/items/xbox-one-gears.jpg",
+                "img": "assets/xbox/items/xbox-one-gears.jpg",
                 "rating": 4.1,
                 "boughtNum": 400
             },
@@ -301,6 +299,5 @@
                 "rating": 4.8,
                 "boughtNum": 42069
             }
-        ]
-    }
+        
 ]

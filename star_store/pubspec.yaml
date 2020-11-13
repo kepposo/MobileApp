@@ -46,14 +46,14 @@ flutter:
   uses-material-design: true
 
   assets:
-  - assets/json/products.json
-  - assets/logo/
-  - assets/PC/
-  - assets/PC/items/
-  - assets/PS4/
-  - assets/PS4/items/
-  - assets/Xbox/
-  - assets/Xbox/items/
+    - assets/products.json
+    - assets/logo/
+    - assets/PC/
+    - assets/PC/items/
+    - assets/ps4/
+    - assets/ps4/items/
+    - assets/xbox/
+    - assets/xbox/items/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
