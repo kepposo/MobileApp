@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'item_list.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -61,13 +62,19 @@ class _State extends State<HomeScreen> {
               onTap: () => Navigator.pushNamed(context, '/login'),
             ),
             ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
-            ),
+                leading: Image.asset('assets/ps4/ps_icon.ico',
+                    color: Colors.grey, height: 27),
+                title: Text('Playstation'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemList("PS4", "Playstation Items")))),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-            ),
+                leading: Image.asset('assets/Xbox/Xbox_icon.ico',
+                    color: Colors.grey, height: 27),
+                title: Text('Xbox'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemList("Xbox", "Xbox Items")))),
+            ListTile(
+                leading: Icon(Icons.computer),
+                title: Text('PC'),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemList("PC", "PC Items")))),
           ],
         ),
       ),
@@ -150,35 +157,39 @@ class _State extends State<HomeScreen> {
                 var showData = jsonDecode(snapshot.data);
 
                 var popularItems = [];
-                var temp;
+                var temp = [];
 
-                for (int i = 0; i <= 8; i++) {
-                  for (int j = 3; j <= showData.length - 1; j++) {
-                    if (showData[i]['boughtNum'] < showData[j]['boughtNum']) {
-                        temp = showData[i];
-                        showData[i] = showData[j];
-                        showData[j] = temp;
-                    }
-                  }
-                  popularItems.add(showData[i]);
+                for (int j = 0; j <= showData.length - 1; j++) {
+                  temp.add(showData[j]['boughtNum']);
+                  temp.sort();
                 }
-                print('---------------------------------------');
-                print(popularItems);
+                for (int i = 0; i <= showData.length - 1; i++) {
+                  if (showData[i]['boughtNum'] == temp.last) {
+                    popularItems.add(showData[i]);
+                    temp.remove(temp.last);
+                    i = 0;
+                  }
+                  if (popularItems.length == 8) {
+                    break;
+                  }
+                }
+
+                // print(popularItems);
 
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
                     // Success case
                     return SizedBox(
-                        height: 333,
+                        height: 400,
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return GridView.count(
-                              childAspectRatio: 0.8,
+                              childAspectRatio: 1,
                               shrinkWrap: true,
                               primary: false,
-                              crossAxisCount: 2,
+                              crossAxisCount: 1,
                               children: <Widget>[
                                 Container(
                                   child:
@@ -192,18 +203,15 @@ class _State extends State<HomeScreen> {
                                           title: Text(
                                               popularItems[index]["name"]
                                                   .toString(),
-                                              style: TextStyle(fontSize: 15)),
+                                              style: TextStyle(fontSize: 30)),
                                           subtitle: Text(
                                             popularItems[index]["price"]
                                                     .toString() +
                                                 "\$",
                                             style: TextStyle(
                                                 color: Colors.red,
-                                                fontSize: 17),
+                                                fontSize: 20),
                                           ),
-                                          trailing: Text(popularItems[index]
-                                                  ["boughtNum"]
-                                              .toString()),
                                         ),
                                         ButtonBar(
                                           children: [
@@ -213,7 +221,9 @@ class _State extends State<HomeScreen> {
                                               onPressed: () {
                                                 // Perform some action
                                               },
-                                              child: const Text('Add to cart'),
+                                              child: const Text('Add to cart',
+                                                  style:
+                                                      TextStyle(fontSize: 20)),
                                             ),
                                           ],
                                         ),

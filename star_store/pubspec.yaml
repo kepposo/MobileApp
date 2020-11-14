@@ -54,6 +54,7 @@ flutter:
     - assets/ps4/items/
     - assets/xbox/
     - assets/xbox/items/
+    - assets/Xbox/Xbox_icon.ico
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'register.dart';
 import 'login.dart';
+import 'item_list.dart';
 
 
 void main() {
@@ -19,7 +20,7 @@ class StarStoreApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/register': (BuildContext context) => new SignUp(),
         '/login': (BuildContext context) => new Login(),
-       // '/homepage': (BuildContext context) => new HomePage(),
+        '/item-list': (BuildContext context) => new ItemList("", ""),
        // '/cartpage': (BuildContext context) => new Cartpage(),
        // '/profile': (BuildContext context) => new Profile(),
       }
