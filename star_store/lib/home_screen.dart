@@ -71,153 +71,176 @@ class _State extends State<HomeScreen> {
           ],
         ),
       ),
-      body: 
-      SingleChildScrollView(
-        child:
-      Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Center(
-            child: Stack(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 5, left: 6, right: 2),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        image: DecorationImage(
-                            image: AssetImage(photos[photoIndex]),
-                            fit: BoxFit.cover)),
-                    height: 200.0,
-                    width: 400.0,
-                  ),
-                ),
-                Positioned(
-                  //dots position
-                  top: 175.0,
-                  left: 25.0,
-                  right: 25.0,
-                  child: SelectedPhoto(
-                      numberOfDots: photos.length, photoIndex: photoIndex),
-                ),
-                Row(
-                  //carousel buttons
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ButtonTheme(
-                      height: 205,
-                      child: RaisedButton(
-                        child: Text('<'),
-                        textColor: Colors.white,
-                        onPressed: _previousImage,
-                        elevation: 5.0,
-                        color: Colors.grey.withOpacity(0.05),
-                      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Center(
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 5, left: 6, right: 2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          image: DecorationImage(
+                              image: AssetImage(photos[photoIndex]),
+                              fit: BoxFit.cover)),
+                      height: 200.0,
+                      width: 400.0,
                     ),
-                    SizedBox(width: 210.0), //space between buttons
-                    ButtonTheme(
-                        height: 205.0,
+                  ),
+                  Positioned(
+                    //dots position
+                    top: 175.0,
+                    left: 25.0,
+                    right: 25.0,
+                    child: SelectedPhoto(
+                        numberOfDots: photos.length, photoIndex: photoIndex),
+                  ),
+                  Row(
+                    //carousel buttons
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      ButtonTheme(
+                        height: 205,
                         child: RaisedButton(
-                          child: Text('>'),
+                          child: Text('<'),
                           textColor: Colors.white,
-                          onPressed: _nextImage,
+                          onPressed: _previousImage,
                           elevation: 5.0,
                           color: Colors.grey.withOpacity(0.05),
-                        )),
-                  ],
-                )
+                        ),
+                      ),
+                      SizedBox(width: 210.0), //space between buttons
+                      ButtonTheme(
+                          height: 205.0,
+                          child: RaisedButton(
+                            child: Text('>'),
+                            textColor: Colors.white,
+                            onPressed: _nextImage,
+                            elevation: 5.0,
+                            color: Colors.grey.withOpacity(0.05),
+                          )),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            //carousel end
+
+            Padding(padding: EdgeInsets.only(top: 20)),
+
+            Row(
+              children: <Widget>[
+                Padding(padding: EdgeInsets.only(left: 6)),
+                Text('Popular Items:',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    )),
               ],
             ),
-          ),
-          //carousel end
 
-          Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 10)),
+            FutureBuilder(
+              future: DefaultAssetBundle.of(context)
+                  .loadString("assets/products.json"),
+              builder: (context, snapshot) {
+                var showData = jsonDecode(snapshot.data);
 
-          Row(
-            children: <Widget>[
-              Padding(padding: EdgeInsets.only(left: 6)),
-              Text('Popular Items:',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  )),
-            ],
-          ),
+                var popularItems = [];
+                var temp;
 
-          Padding(padding: EdgeInsets.only(top: 10)),
-          FutureBuilder(
-            future: DefaultAssetBundle.of(context).loadString("assets/products.json"),
-            builder: (context, snapshot) {
-              var showData = jsonDecode(snapshot.data);
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  // Success case
-                  return SizedBox(
-                    height: 333,
-                      child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return GridView.count(
-                        childAspectRatio: 0.8,
-                        shrinkWrap: true,
-                        primary: false,
-                        crossAxisCount: 2,
-                        children: <Widget>[
-                          Container(
-                            child:
-                                //item card start
-                                Card(
-                              clipBehavior: Clip.antiAlias,
-                              child: Column(
-                                children: [
-                                  Image.asset(showData[index]["img"]),
-                                  ListTile(
-                                    title: Text(
-                                        showData[index]["name"].toString(),
-                                        style: TextStyle(fontSize: 15)),
-                                    subtitle: Text(
-                                      showData[index]["price"].toString() + "\$",
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 17),
+                for (int i = 0; i <= 8; i++) {
+                  for (int j = 3; j <= showData.length - 1; j++) {
+                    if (showData[i]['boughtNum'] < showData[j]['boughtNum']) {
+                        temp = showData[i];
+                        showData[i] = showData[j];
+                        showData[j] = temp;
+                    }
+                  }
+                  popularItems.add(showData[i]);
+                }
+                print('---------------------------------------');
+                print(popularItems);
+
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
+                    // Success case
+                    return SizedBox(
+                        height: 333,
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return GridView.count(
+                              childAspectRatio: 0.8,
+                              shrinkWrap: true,
+                              primary: false,
+                              crossAxisCount: 2,
+                              children: <Widget>[
+                                Container(
+                                  child:
+                                      //item card start
+                                      Card(
+                                    clipBehavior: Clip.antiAlias,
+                                    child: Column(
+                                      children: [
+                                        Image.asset(popularItems[index]["img"]),
+                                        ListTile(
+                                          title: Text(
+                                              popularItems[index]["name"]
+                                                  .toString(),
+                                              style: TextStyle(fontSize: 15)),
+                                          subtitle: Text(
+                                            popularItems[index]["price"]
+                                                    .toString() +
+                                                "\$",
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 17),
+                                          ),
+                                          trailing: Text(popularItems[index]
+                                                  ["boughtNum"]
+                                              .toString()),
+                                        ),
+                                        ButtonBar(
+                                          children: [
+                                            FlatButton(
+                                              textColor:
+                                                  const Color(0xFF6200EE),
+                                              onPressed: () {
+                                                // Perform some action
+                                              },
+                                              child: const Text('Add to cart'),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  ButtonBar(
-                                    children: [
-                                      FlatButton(
-                                        textColor: const Color(0xFF6200EE),
-                                        onPressed: () {
-                                          // Perform some action
-                                        },
-                                        child: const Text('Add to cart'),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                    itemCount: showData.length,
-                  ));
+                                ),
+                              ],
+                            );
+                          },
+                          itemCount: popularItems.length,
+                        ));
+                  }
+                  // Error case
+                  return Text('Something went wrong');
+                } else {
+                  // Loading data
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
-                // Error case
-                return Text('Something went wrong');
-              } else {
-                // Loading data
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          ),
+              },
+            ),
 
-          //item card end
-        ],
-      ),
+            //item card end
+          ],
+        ),
       ),
     );
   }
