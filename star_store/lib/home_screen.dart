@@ -75,6 +75,16 @@ class _State extends State<HomeScreen> {
                 leading: Icon(Icons.computer),
                 title: Text('PC'),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemList("PC", "PC Items")))),
+                ListTile(
+              leading: Icon(Icons.phone,),
+              title: Text('Contact Us'),
+              onTap: () => Navigator.pushNamed(context, '/contact-us'),
+            ),
+                ListTile(
+              leading: Icon(Icons.campaign,),
+              title: Text('About Us'),
+              onTap: () => Navigator.pushNamed(context, '/about-us'),
+            ),
           ],
         ),
       ),
