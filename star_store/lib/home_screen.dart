@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'item_list.dart';
 
+
+
 class HomeScreen extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
 class _State extends State<HomeScreen> {
+
+ 
+
+
   int photoIndex = 0;
 
   List<String> photos = [
@@ -85,10 +91,21 @@ class _State extends State<HomeScreen> {
               title: Text('About Us'),
               onTap: () => Navigator.pushNamed(context, '/about-us'),
             ),
+             ListTile(
+              leading: Icon(Icons.qr_code_sharp),
+              title: Text('Scan Item'),
+              onTap: () => Navigator.pushNamed(context, '/cam'),
+            ),
+            ListTile(
+              leading: Icon(Icons.account_balance),
+              title: Text('See Sellers'),
+              onTap: () => Navigator.pushNamed(context, '/sellers'),
+            ),
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      body:
+       SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[

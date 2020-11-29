@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
+  @override
+  _SignUpState createState() => _SignUpState();
+}
+
+enum Gender { male, female }
+
+class _SignUpState extends State<SignUp> {
+  Gender _gender = Gender.male;
+
+  bool status = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +63,45 @@ class SignUp extends StatelessWidget {
                     border: OutlineInputBorder(),
                   ),
                 ),
+              ),
+              ListTile(
+                title: const Text('Male'),
+                leading: Radio(
+                  value: Gender.male,
+                  groupValue: _gender,
+                  onChanged: (Gender value) {
+                    setState(() {
+                      _gender = value;
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                title: const Text('Female'),
+                leading: Radio(
+                  value: Gender.female,
+                  groupValue: _gender,
+                  onChanged: (Gender value) {
+                    setState(() {
+                      _gender = value;
+                    });
+                  },
+                ),
+              ),
+              Row(
+                children: [
+                  Switch(
+                    value: status,
+                    onChanged: (value) {
+                      setState(() {
+                        status = value;
+                      });
+                    },
+                    activeTrackColor: Colors.blue,
+                    activeColor: Colors.blue,
+                  ),
+                  Text("Do you accept our terms and conditions?", style: TextStyle(color: Colors.grey),),
+                ],
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
