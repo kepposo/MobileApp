@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class Login extends StatelessWidget 
 {
   @override
   Widget build(BuildContext context) {
+
+
+    final email = TextEditingController();
+  final password = TextEditingController();
+
+  @override
+  void dispose() {
+    try {
+      email.clear();
+      password.clear();
+    } catch (_) {}
+  }
+
+
     return Scaffold(
         
         appBar: AppBar(
@@ -32,6 +47,7 @@ class Login extends StatelessWidget
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
                 child: TextField(
+                  obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     labelText: 'Password',
@@ -51,9 +67,13 @@ class Login extends StatelessWidget
                   ),
                   color: Colors.blue,
                   onPressed: () {
-                    
-                  },
-                ),
+                            getAll(email.text, password.text);
+                            if (cred == true) {
+                              Navigator.pushNamed(context, '/homepage');
+                            } else {
+                              print('false');
+                            };
+                  }),
               ),
         
               Padding(

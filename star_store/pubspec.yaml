@@ -34,6 +34,9 @@ dependencies:
   camera:
   path_provider:
   path:
+  sqflite:
+  flutter_local_notifications: ^1.4.0
+
 
 dev_dependencies:
   flutter_test:
