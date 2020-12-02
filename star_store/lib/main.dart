@@ -11,9 +11,10 @@ import 'contact.dart';
 import 'cam.dart';
 import 'sellers.dart';
 import 'package:path/path.dart';
-import 'schedule_notifications.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'notification.dart';
 
-
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 class User {
   String name;
@@ -99,6 +100,7 @@ void delTable() async {
 Future<void> main() async {
 
   camera();
+  
 
   runApp(StarStoreApp());
 }
@@ -107,27 +109,12 @@ class StarStoreApp extends StatelessWidget {
 @override
   Widget build(BuildContext context) 
   {
-
-    @override
-    void initState()
-    {
-      super.initState();
-
-      notifications = ScheduleNotifications(
-
-        'This is a notification'
-      );
-
-
-      notifications
-
-    }
     
     return 
     new MaterialApp(
-      home: new HomeScreen(),
+      home: new HomeScreen(payload: payload,),
       routes: <String, WidgetBuilder>{
-        '/homepage': (BuildContext context) => new HomeScreen(),
+        '/homepage': (BuildContext context) => new HomeScreen(payload: payload,),
         '/register': (BuildContext context) => new SignUp(),
         '/login': (BuildContext context) => new Login(),
         '/item-list': (BuildContext context) => new ItemList("", ""),
@@ -135,9 +122,12 @@ class StarStoreApp extends StatelessWidget {
         '/contact-us': (BuildContext context) => new ContactUs(),
         '/cam': (BuildContext context) => new TakePictureScreen(camera: firstCamera,),
         '/sellers': (BuildContext context) => new Sellers(),
+        '/noti': (BuildContext context) => new Notifications(),
       }
     );
+
   }// Widget
+
 
 }
 dynamic firstCamera = null;
@@ -154,3 +144,5 @@ Future<void> camera() async {
 return firstCamera;
 
 }
+
+String payload = null;

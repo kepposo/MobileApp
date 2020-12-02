@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:star_store/login.dart';
 import 'dart:convert';
 import 'item_list.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/cupertino.dart';
 
 
 
 class HomeScreen extends StatefulWidget {
+  final String payload;
+
+  HomeScreen({
+    @required this.payload,
+  });
+
+
   @override
   _State createState() => _State();
 }
@@ -12,9 +22,97 @@ class HomeScreen extends StatefulWidget {
 class _State extends State<HomeScreen> {
 
  
+ FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      new FlutterLocalNotificationsPlugin();
+  var initializationSettingsAndroid;
+  var initializationSettingsIOS;
+  var initializationSettings;
 
+  void _showNotification() async {
+    await _demoNotification();
+  }
+
+  Future<void> _demoNotification() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'channel_ID', 'channel name', 'channel description',
+        importance: Importance.Max,
+        priority: Priority.High,
+        ticker: 'test ticker');
+
+    var iOSChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(0, 'Hello, buddy',
+        'A message from flutter buddy', platformChannelSpecifics,
+        payload: 'test oayload');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializationSettingsAndroid =
+        new AndroidInitializationSettings('app_icon');
+    initializationSettingsIOS = new IOSInitializationSettings(
+        onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+    initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+  }
+
+  Future onSelectNotification(String payload) async {
+    if (payload != null) {
+      debugPrint('Notification payload: $payload');
+    }
+    await Navigator.push(context,
+        new MaterialPageRoute(builder: (context) => new Login()));
+  }
+
+  Future onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+              title: Text(title),
+              content: Text(body),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                  isDefaultAction: true,
+                  child: Text('Ok'),
+                  onPressed: () async {
+                    Navigator.of(context, rootNavigator: true).pop();
+                    await Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Login()));
+                  },
+                )
+              ],
+            ));
+  }
+
+  Future<void> scheduleNotification() async {
+  var scheduledNotificationDateTime =
+      DateTime.now().add(Duration(seconds: 5));
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    'channel id',
+    'channel name',
+    'channel description',
+    icon: 'flutter_devs',
+    largeIcon: DrawableResourceAndroidBitmap('flutter_devs'),
+  );
+  var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  var platformChannelSpecifics = NotificationDetails(
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  await flutterLocalNotificationsPlugin.schedule(
+      0,
+      'scheduled title',
+      'scheduled body',
+      scheduledNotificationDateTime,
+      platformChannelSpecifics);
+}
 
   int photoIndex = 0;
+  
 
   List<String> photos = [
     'assets/PC/PC.jpg',
@@ -100,6 +198,11 @@ class _State extends State<HomeScreen> {
               leading: Icon(Icons.account_balance),
               title: Text('See Sellers'),
               onTap: () => Navigator.pushNamed(context, '/sellers'),
+            ),
+            ListTile(
+              leading: Icon(Icons.notifications_active),
+              title: Text('Notification'),
+              onTap: () => _showNotification,
             ),
           ],
         ),
